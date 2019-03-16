@@ -2,7 +2,7 @@
 #include<sstream>
 using namespace std;
 
-void i2s(int x,string &s)
+void i2s(int x,string &s)//可以直接把int 转string 
 {
 	stringstream ss;
 	ss<<x;
@@ -17,4 +17,4 @@ int main()
 	return 0;
 }
 
-#output:999 999
+//output:999 999
