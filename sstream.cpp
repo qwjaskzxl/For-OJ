@@ -3,7 +3,6 @@ https://blog.csdn.net/joeblackzqq/article/details/7032703
 #include<bits/stdc++.h>
 #include<sstream>
 using namespace std;
-
 void i2s(int x,string &s)//可以直接把int 转string 
 {
 	stringstream ss;
@@ -23,10 +22,10 @@ int main()
 //output:999 999
 
 
+//另一个例子：
 #include <iostream>
 #include <sstream>
-using namespace std;
- 
+using namespace std; 
 int main()
 {
 	istringstream istr;
