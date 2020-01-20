@@ -1,0 +1,77 @@
+第五题：把回文的生序排列
+#include <bits/stdc++.h> 
+#include<stdio.h>
+#include<string.h>
+#include<cstring>
+#include<iostream> 
+#include<cmath>
+#include<algorithm> 
+#include<vector>
+using namespace std;
+vector<string>v;//不定长	
+int cmp(string a,string b) //这样定义ab 
+{		
+	if(a.length()==b.length())
+	{
+		return a<b;
+	}
+	else return a.length()<b.length();
+}
+int main()
+{
+	int n,m=0;
+	cin>>n;
+	for(int i=0;i<n;i++)
+	{		
+		string s;
+		cin>>s;
+		int l=s.length(),t=1;
+		for(int i=0;i<l/2;i++)
+		{
+			if(s[i]!=s[l-1-i]) t=0;						
+		}
+		if(t) 
+		{
+			v.push_back(s);
+			m++;
+		}
+	} 		
+	sort(v.begin(),v.end(),cmp);
+	for(int i=0;i<m;i++)
+	{
+		cout<<v[i]<<endl;
+	}			
+}
+第六题：哈夫曼树，选两个最小的，二者之和加入集合，输出最后的值
+#include <bits/stdc++.h> 
+#include<stdio.h>
+#include<string.h>
+#include<cstring>
+#include<iostream> 
+#include<cmath>
+#include<algorithm> 
+#include<vector>
+vector<int>v;//不定长	
+int cmp(string a,string b) //这样定义ab 
+{		
+	; 
+}
+int main()
+{
+	int n;cin>>n;
+	for(int i=0;i<n;i++) 
+	{
+		int a; cin>>a;
+		v.push_back(a);
+	}
+	int s=0;
+	while(v.size()>1)
+	{
+		sort(v.begin(),v.end());
+		v.push_back(v[0]+v[1]);
+		s+=v[0]+v[1];
+		v.erase(v.begin(),v.begin()+2); //要+2，表示0和1
+	}
+	cout<<s;
+	
+}

@@ -1,0 +1,181 @@
+第三题：按照分数排序
+#include<stdio.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+#include<algorithm> 
+using namespace std;
+struct stu{
+	string name;
+	int score[4];
+};
+stu S[101];
+int cmp(stu a,stu b)
+{		
+	if(a.score[0]==b.score[0])
+	{
+		for(int i=1;i<=3;i++)
+		{
+			if(a.score[i]!=b.score[i]) return a.score[i]>b.score[i];
+		}
+	}
+	else return a.score[0]>b.score[0];
+}
+int main()
+{
+	int n;cin>>n;	
+	for(int i=0;i<n;i++)
+		cin>>S[i].name>>S[i].score[0]>>S[i].score[1]>>S[i].score[2]>>S[i].score[3];
+			
+	sort(S,S+n,cmp);
+	for(int i=0;i<n-1;i++)
+		cout<<S[i].name<<' '<<S[i].score[0]<<' '<<S[i].score[1]<<' '<<S[i].score[2]<<' '<<S[i].score[3]<<endl;
+	cout<<S[n-1].name<<' '<<S[n-1].score[0]<<' '<<S[n-1].score[1]<<' '<<S[n-1].score[2]<<' '<<S[n-1].score[3];
+}
+
+第四题：找多少种年份，然后小到大排序
+#include<stdio.h>
+#include<string.h>
+#include<cstring>
+#include<iostream> 
+#include<cmath>
+#include<algorithm> 
+using namespace std;
+int month[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+int d[3];
+//int runnian[24];
+struct node{
+	int d2[3];
+}N[3];
+//node N[3];
+bool Runnian(int n)
+{
+//	for(int i=0;i<24;i++) 
+//	{
+//		if(x==runnian[i]) return true;
+//		else return false;	
+//	}
+	if(n%400==0||n%100!=0&&n%4==0) return true;
+	else return false;	
+}
+bool equal(node a,node b)
+{
+	int t=1;
+	for(int i=0;i<3;i++)
+	{
+		if(a.d2[i]!=b.d2[i]) t=0;			 
+	}
+	if(t) return true;
+	else return false;	
+} 
+int cmp(node a,node b)
+{		
+	for(int i=0;i<3;i++)
+	{
+		if(a.d2[i]!=b.d2[i])
+		return a.d2[i]<b.d2[i];
+	}
+}
+int main()
+{
+	scanf("%d/%d/%d",&d[0],&d[1],&d[2]);
+//	for(int i=1960,j=0;i<=2056;i+=4,j++) runnian[j]=i;
+	int n=0;
+//	年月日
+	int tp;	
+	if(d[0]>=60)  tp=1900+d[0];
+		else tp=2000+d[0];
+	if(Runnian(tp)) month[2]=29;
+	if(d[1]>0&&d[2]>0&&d[1]<=12&&d[2]<=month[d[1]]) 
+	{		
+		N[n].d2[0]=tp;
+		N[n].d2[1]=d[1];
+		N[n].d2[2]=d[2];
+		n++;
+	}
+	month[2]=28;
+	tp=0;
+//	月日年	
+	if(d[2]>=60)  tp=1900+d[2];
+		else tp=2000+d[2];
+	if(Runnian(tp)) month[2]=29;	
+	if(d[0]>0&&d[1]>0&&d[0]<=12&&d[1]<=month[d[0]]) 
+	{				
+		N[n].d2[0]=tp;
+		N[n].d2[1]=d[0];
+		N[n].d2[2]=d[1];
+		n++;
+	}
+//	日月年 
+	if(d[0]>0&&d[1]>0&&d[1]<=12&&d[0]<=month[d[1]]) 
+	{
+		N[n].d2[0]=tp;
+		N[n].d2[1]=d[1];
+		N[n].d2[2]=d[0];
+		n++;
+	}
+	sort(N,N+n,cmp); 
+//	unique(N,N+n); //STL直接去重。但是结构体不行，数组可以 
+	for(int i=0;i<n;i++)
+	{
+		if(equal(N[i],N[i+2])) n--;
+		if(equal(N[i],N[i+1]))
+		{
+			printf("%d-%02d-%02d\n",N[i].d2[0],N[i].d2[1],N[i].d2[2]);
+			i++;		
+		}
+		else printf("%d-%02d-%02d\n",N[i].d2[0],N[i].d2[1],N[i].d2[2]);					
+	}	//补上前导0，按照宽度为2
+	
+}
+
+第五题：把回文的生序排列
+#include <bits/stdc++.h>
+#include<stdio.h>
+#include<string.h>
+#include<cstring>
+#include<iostream> 
+#include<cmath>
+#include<algorithm> 
+#include<vector>
+using namespace std;
+class node{
+	private:
+		int d2[3];
+	public:
+}N[3];
+vector<string>v;//不定长	
+int cmp(string a,string b) //这样定义ab 
+{		
+	if(a.length()==b.length())
+	{
+		return a<b;
+	}
+	else return a.length()<b.length();
+}
+int main()
+{
+	int n,m=0;
+	cin>>n;
+	for(int i=0;i<n;i++)
+	{		
+		string s;
+		cin>>s;
+		int l=s.length(),t=1;
+		for(int i=0;i<l/2;i++)
+		{
+			if(s[i]!=s[l-1-i]) t=0;						
+		}
+		if(t) 
+		{
+			v.push_back(s);
+			m++;
+		}
+	} 		
+	sort(v.begin(),v.end(),cmp);
+	for(int i=0;i<m;i++)
+	{
+		cout<<v[i]<<endl;
+	}			
+}
